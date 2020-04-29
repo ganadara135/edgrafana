@@ -1,3 +1,7 @@
+# docker 설치 방법 
+docker run -it --volume=$(pwd):/ed/ --net host  --name edgrafana ganadara135/edgrafana:7.1.0-pre /bin/bash
+
+
 ![Grafana](docs/logo-horizontal.png)
 
 The open-source platform for monitoring and observability.
