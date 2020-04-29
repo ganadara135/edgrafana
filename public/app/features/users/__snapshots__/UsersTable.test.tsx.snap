@@ -1,0 +1,372 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render should render component 1`] = `
+<table
+  className="filter-table form-inline"
+>
+  <thead>
+    <tr>
+      <th />
+      <th>
+        Login
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        Name
+      </th>
+      <th>
+        Seen
+      </th>
+      <th>
+        Role
+      </th>
+      <th
+        style={
+          Object {
+            "width": "34px",
+          }
+        }
+      />
+    </tr>
+  </thead>
+  <tbody />
+</table>
+`;
+
+exports[`Render should render users table 1`] = `
+<table
+  className="filter-table form-inline"
+>
+  <thead>
+    <tr>
+      <th />
+      <th>
+        Login
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        Name
+      </th>
+      <th>
+        Seen
+      </th>
+      <th>
+        Role
+      </th>
+      <th
+        style={
+          Object {
+            "width": "34px",
+          }
+        }
+      />
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      key="0-0"
+    >
+      <td
+        className="width-4 text-center"
+      >
+        <img
+          className="filter-table__avatar"
+          src="url/to/avatar"
+        />
+      </td>
+      <td>
+        user-0
+      </td>
+      <td>
+        <span
+          className="ellipsis"
+        >
+          user-0@test.com
+        </span>
+      </td>
+      <td>
+        user-0 test
+      </td>
+      <td />
+      <td
+        className="width-8"
+      >
+        <Component
+          onChange={[Function]}
+          value="Admin"
+        />
+      </td>
+      <td>
+        <Button
+          icon="times"
+          onClick={[Function]}
+          size="sm"
+          variant="destructive"
+        />
+        <Component
+          body="Are you sure you want to delete user user-0?"
+          confirmText="Delete"
+          isOpen={false}
+          onConfirm={[Function]}
+          onDismiss={[Function]}
+          title="Delete"
+        />
+      </td>
+    </tr>
+    <tr
+      key="1-1"
+    >
+      <td
+        className="width-4 text-center"
+      >
+        <img
+          className="filter-table__avatar"
+          src="url/to/avatar"
+        />
+      </td>
+      <td>
+        user-1
+      </td>
+      <td>
+        <span
+          className="ellipsis"
+        >
+          user-1@test.com
+        </span>
+      </td>
+      <td>
+        user-1 test
+      </td>
+      <td />
+      <td
+        className="width-8"
+      >
+        <Component
+          onChange={[Function]}
+          value="Admin"
+        />
+      </td>
+      <td>
+        <Button
+          icon="times"
+          onClick={[Function]}
+          size="sm"
+          variant="destructive"
+        />
+        <Component
+          body="Are you sure you want to delete user user-1?"
+          confirmText="Delete"
+          isOpen={false}
+          onConfirm={[Function]}
+          onDismiss={[Function]}
+          title="Delete"
+        />
+      </td>
+    </tr>
+    <tr
+      key="2-2"
+    >
+      <td
+        className="width-4 text-center"
+      >
+        <img
+          className="filter-table__avatar"
+          src="url/to/avatar"
+        />
+      </td>
+      <td>
+        user-2
+      </td>
+      <td>
+        <span
+          className="ellipsis"
+        >
+          user-2@test.com
+        </span>
+      </td>
+      <td>
+        user-2 test
+      </td>
+      <td />
+      <td
+        className="width-8"
+      >
+        <Component
+          onChange={[Function]}
+          value="Admin"
+        />
+      </td>
+      <td>
+        <Button
+          icon="times"
+          onClick={[Function]}
+          size="sm"
+          variant="destructive"
+        />
+        <Component
+          body="Are you sure you want to delete user user-2?"
+          confirmText="Delete"
+          isOpen={false}
+          onConfirm={[Function]}
+          onDismiss={[Function]}
+          title="Delete"
+        />
+      </td>
+    </tr>
+    <tr
+      key="3-3"
+    >
+      <td
+        className="width-4 text-center"
+      >
+        <img
+          className="filter-table__avatar"
+          src="url/to/avatar"
+        />
+      </td>
+      <td>
+        user-3
+      </td>
+      <td>
+        <span
+          className="ellipsis"
+        >
+          user-3@test.com
+        </span>
+      </td>
+      <td>
+        user-3 test
+      </td>
+      <td />
+      <td
+        className="width-8"
+      >
+        <Component
+          onChange={[Function]}
+          value="Admin"
+        />
+      </td>
+      <td>
+        <Button
+          icon="times"
+          onClick={[Function]}
+          size="sm"
+          variant="destructive"
+        />
+        <Component
+          body="Are you sure you want to delete user user-3?"
+          confirmText="Delete"
+          isOpen={false}
+          onConfirm={[Function]}
+          onDismiss={[Function]}
+          title="Delete"
+        />
+      </td>
+    </tr>
+    <tr
+      key="4-4"
+    >
+      <td
+        className="width-4 text-center"
+      >
+        <img
+          className="filter-table__avatar"
+          src="url/to/avatar"
+        />
+      </td>
+      <td>
+        user-4
+      </td>
+      <td>
+        <span
+          className="ellipsis"
+        >
+          user-4@test.com
+        </span>
+      </td>
+      <td>
+        user-4 test
+      </td>
+      <td />
+      <td
+        className="width-8"
+      >
+        <Component
+          onChange={[Function]}
+          value="Admin"
+        />
+      </td>
+      <td>
+        <Button
+          icon="times"
+          onClick={[Function]}
+          size="sm"
+          variant="destructive"
+        />
+        <Component
+          body="Are you sure you want to delete user user-4?"
+          confirmText="Delete"
+          isOpen={false}
+          onConfirm={[Function]}
+          onDismiss={[Function]}
+          title="Delete"
+        />
+      </td>
+    </tr>
+    <tr
+      key="5-5"
+    >
+      <td
+        className="width-4 text-center"
+      >
+        <img
+          className="filter-table__avatar"
+          src="url/to/avatar"
+        />
+      </td>
+      <td>
+        user-5
+      </td>
+      <td>
+        <span
+          className="ellipsis"
+        >
+          user-5@test.com
+        </span>
+      </td>
+      <td>
+        user-5 test
+      </td>
+      <td />
+      <td
+        className="width-8"
+      >
+        <Component
+          onChange={[Function]}
+          value="Admin"
+        />
+      </td>
+      <td>
+        <Button
+          icon="times"
+          onClick={[Function]}
+          size="sm"
+          variant="destructive"
+        />
+        <Component
+          body="Are you sure you want to delete user user-5?"
+          confirmText="Delete"
+          isOpen={false}
+          onConfirm={[Function]}
+          onDismiss={[Function]}
+          title="Delete"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
