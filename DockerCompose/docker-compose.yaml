@@ -1,0 +1,30 @@
+version: "2"
+
+services:
+    edgrafana: 
+        image: "ganadara135/edgrafana:7.1.0-pre"
+        container_name: edgrafana
+        environment: 
+            GF_RENDERING_SERVER_URL: "http://27.96.135.50:8081/render"
+            GF_RENDERING_CALLBACK_URL: "http://27.96.135.50:3000/"
+            GF_LOG_FILTERS: "rendering:debug"
+        network_mode: host
+        ports: 
+            - "3000:3000"
+    renderer: 
+        image: "grafana/grafana-image-renderer:latest"
+        container_name: renderer
+        depends_on: 
+            - edgrafana
+        network_mode: host
+        ports: 
+            - "8081"
+    pdfreporter: 
+        image: "izakmarais/grafana-reporter"
+        container_name: pdfreporter
+        depends_on: 
+            - edgrafana
+            - renderer
+        network_mode: host
+        ports: 
+            - "8086:8086"

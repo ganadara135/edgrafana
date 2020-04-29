@@ -131,9 +131,9 @@ build-docker-dev: ## Build Docker image for development (fast).
 	cp dist/grafana-latest.linux-x64.tar.gz packaging/docker
 	cd packaging/docker && docker build --tag grafana/grafana:dev .
 
-build-docker-full: ## Build Docker image for development.
-	@echo "build docker container"
-	docker build --tag grafana/grafana:dev .
+build-docker-full: ## Build Docker image for development. ## 첨부 pre-installed plugins with grafana-image-renderer
+	@echo "build docker container and pre-installed plugins with grafana-image-renderer"
+	docker build --build-arg "GF_INSTALL_IMAGE_RENDERER_PLUGIN=true" --build-arg "GF_INSTALL_PLUGINS=grafana-image-renderer" --tag grafana/grafana:dev .
 
 ##@ Services
 

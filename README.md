@@ -1,5 +1,31 @@
-# docker 설치 방법 
-docker run -it --volume=$(pwd):/ed/ --net host  --name edgrafana ganadara135/edgrafana:7.1.0-pre /bin/bash
+# Build Grafana docker image
+> make build-docker-full
+
+# Push into dockerhub.io
+> docker tag local-image:tagname new-repo:tagname
+> docker push new-repo:tagname
+
+<!-- # docker 설치 방법  -->
+<!-- > docker run -d --volume=$(pwd):/ed/ --net=host --name=edgrafana ganadara135/edgrafana:7.1.0-pre-render
+> docker run -d --volume=$(pwd):/ed/ --net=host --name=edgrafana  -e "GF_INSTALL_PLUGINS=grafana-image-renderer 1.0.12"  ganadara135/edgrafana:7.1.0-pre -->
+
+<!-- > docker run -d --volume=$(pwd):/ed/ -p 3000:3000 --net=host --name=edgrafana ganadara135/edgrafana:7.1.0-pre -->
+
+
+<!-- # grafana_reporter 설치
+> docker run -d --volume=$(pwd):/pdf/ -p 8686:8686 --net="host" --name pdf izakmarais/grafana-reporter -->
+
+# edgrafan 와 grafana-image-render grafana_reporter 설치
+> docker-compose up -d
+
+# grafana_reporter 연결 체크
+1. 대시보드 하나 만듦
+2. Apikey 생성
+3. 연결체크
+> curl http://27.96.135.50:8686/api/v5/report/{대시보드uid}
+> curl http://27.96.135.50:8686/api/v5/report/4Gs4J46Wk?apitoken=eyJrIjoiTjU5RWhYWGFkWW53SDc2YW9pdmdLZzFWeFhDYlltOWQiLCJuIjoicGRmIiwiaWQiOjF9
+
+
 
 
 ![Grafana](docs/logo-horizontal.png)
