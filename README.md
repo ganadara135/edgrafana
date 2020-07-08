@@ -2,8 +2,9 @@
 > make build-docker-full
 
 # Push into dockerhub.io
-> docker tag local-image:tagname new-repo:tagname
-> docker push new-repo:tagname
+> check docker image name in Makefile which is located on build-docker-full line.  <br>
+> docker tag local-image:tagname new-repo:tagname <br>
+> docker push new-repo:tagname  <br>
 
 <!-- # docker 설치 방법  -->
 <!-- > docker run -d --volume=$(pwd):/ed/ --net=host --name=edgrafana ganadara135/edgrafana:7.1.0-pre-render
@@ -19,10 +20,10 @@
 > docker-compose up -d
 
 # grafana_reporter 연결 체크
-1. 대시보드 하나 만듦
-2. Apikey 생성
-3. 연결체크
-> curl http://27.96.135.50:8686/api/v5/report/{대시보드uid}
+1. 대시보드 하나 만듦 <br>
+2. Apikey 생성 <br>
+3. 연결체크 <br>
+> curl http://27.96.135.50:8686/api/v5/report/{대시보드uid} <br>
 > curl http://27.96.135.50:8686/api/v5/report/4Gs4J46Wk?apitoken=eyJrIjoiTjU5RWhYWGFkWW53SDc2YW9pdmdLZzFWeFhDYlltOWQiLCJuIjoicGRmIiwiaWQiOjF9
 
 

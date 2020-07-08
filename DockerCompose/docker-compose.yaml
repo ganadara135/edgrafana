@@ -4,11 +4,15 @@ services:
     edgrafana: 
         image: "ganadara135/edgrafana:7.1.0-pre"
         container_name: edgrafana
+        volumes: 
+            - ~/work/energy/test/grafana-plugins:/var/lib/grafana/plugins
         environment: 
-            GF_RENDERING_SERVER_URL: "http://27.96.135.50:8081/render"
-            GF_RENDERING_CALLBACK_URL: "http://27.96.135.50:3000/"
+            # GF_RENDERING_SERVER_URL: "http://27.96.135.50:8081/render"
+            # GF_RENDERING_CALLBACK_URL: "http://27.96.135.50:3000/"
+            GF_RENDERING_SERVER_URL: "http://localhost:8081/render"
+            GF_RENDERING_CALLBACK_URL: "http://localhost:3000/"
             GF_LOG_FILTERS: "rendering:debug"
-        network_mode: host
+        # network_mode: host    this is not working
         ports: 
             - "3000:3000"
     renderer: 
@@ -16,7 +20,7 @@ services:
         container_name: renderer
         depends_on: 
             - edgrafana
-        network_mode: host
+        # network_mode: host    this is not working
         ports: 
             - "8081"
     pdfreporter: 
@@ -25,6 +29,6 @@ services:
         depends_on: 
             - edgrafana
             - renderer
-        network_mode: host
+        # network_mode: host
         ports: 
             - "8086:8086"
