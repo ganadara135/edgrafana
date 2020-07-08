@@ -17,7 +17,8 @@
 > docker run -d --volume=$(pwd):/pdf/ -p 8686:8686 --net="host" --name pdf izakmarais/grafana-reporter -->
 
 # edgrafan 와 grafana-image-render grafana_reporter 설치
-> docker-compose up -d
+> docker-compose up -d      <br>
+ ex) 위 명령어는 DockerCompose 폴더 안에서 실행해도 됨
 
 # grafana_reporter 연결 체크
 1. 대시보드 하나 만듦 <br>
@@ -26,7 +27,9 @@
 > curl http://27.96.135.50:8686/api/v5/report/{대시보드uid} <br>
 > curl http://27.96.135.50:8686/api/v5/report/4Gs4J46Wk?apitoken=eyJrIjoiTjU5RWhYWGFkWW53SDc2YW9pdmdLZzFWeFhDYlltOWQiLCJuIjoicGRmIiwiaWQiOjF9
 
-
+# grafana_plugin 설치
+1. docker-compose.yaml 에서 volume 부분에서 plugin 파일과 연결해 줌 <br>
+    ex) plugin 파일을 호스트 의 특정 폴더에 넣고, 해당 폴더를 volume 과 연결해줌 <br>
 
 
 ![Grafana](docs/logo-horizontal.png)
