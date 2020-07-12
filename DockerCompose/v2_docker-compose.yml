@@ -20,6 +20,7 @@ services:
         # network_mode: host    this is not working
         ports: 
             - "3003:3000"
+            
     renderer: 
         image: "grafana/grafana-image-renderer:latest"
         container_name: renderer
