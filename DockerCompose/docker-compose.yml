@@ -1,0 +1,49 @@
+version: '3.6'
+
+services:
+
+    edgrafana:
+        image: "ganadara135/edgrafana:7.1.0-pre"
+        # environment:
+        #     GF_RENDERING_SERVER_URL: "http://27.96.131.183:8081/render"
+        #     GF_RENDERING_CALLBACK_URL: "http://27.96.131.183:3003/"
+        #     GF_LOG_FILTERS: "rendering:debug"
+        environment:        # For Local
+            GF_RENDERING_SERVER_URL: "http://renderer:8081/render"
+            GF_RENDERING_CALLBACK_URL: "http://edgrafana:3000/"
+            GF_LOG_FILTERS: "rendering:debug"
+        expose:
+            - 3000
+        ports:
+            - "3000:3000"
+        networks:
+            - ednet
+
+    renderer: 
+        image: "grafana/grafana-image-renderer:latest"
+        container_name: renderer
+        depends_on: 
+            - edgrafana
+        ports: 
+            - "8081:8081"
+        networks:
+            - ednet
+
+    pdfreporter:
+        image: izakmarais/grafana-reporter:${gr_version:-latest}
+        depends_on: 
+            - edgrafana
+            - renderer
+        command: "-ip edgrafana:3000"
+        ports:
+            - "8686:8686"
+        networks:
+            - ednet
+
+networks:
+    ednet:
+        name: ednet
+
+# curl -H "Authorization: Bearer eyJrIjoiMlAwR0tmMW5abU1SbDR4WlBEaGRONzVheWVjbXNTN2IiLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3003/api/dashboards/home
+
+# curl -H "Authorization: Bearer eyJrIjoidjl2dmRpT3pyTG5nbGJxTzA3anMxY2I4bGl5WW1tZXIiLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3000/api/dashboards/home

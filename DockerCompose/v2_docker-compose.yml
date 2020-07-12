@@ -28,6 +28,7 @@ services:
         # network_mode: host    this is not working
         ports: 
             - "8081"
+            
     pdfreporter: 
         image: "izakmarais/grafana-reporter"
         container_name: pdfreporter
@@ -37,3 +38,4 @@ services:
         # network_mode: host
         ports: 
             - "8086:8086"
+        # command: "-ip grafana:3000"

@@ -26,6 +26,9 @@
 3. 연결체크 <br>
 > curl http://27.96.135.50:8686/api/v5/report/{대시보드uid} <br>
 > curl http://27.96.135.50:8686/api/v5/report/4Gs4J46Wk?apitoken=eyJrIjoiTjU5RWhYWGFkWW53SDc2YW9pdmdLZzFWeFhDYlltOWQiLCJuIjoicGRmIiwiaWQiOjF9
+4. 참고 pdf reporting link <br>
+> https://github.com/IzakMarais/reporter#endpoint <br>
+
 
 # grafana_plugin 설치
 1. docker-compose.yaml 에서 volume 부분에서 plugin 파일과 연결해 줌 <br>
