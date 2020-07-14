@@ -33,6 +33,8 @@
 # grafana_plugin 설치
 1. docker-compose.yaml 에서 volume 부분에서 plugin 파일과 연결해 줌 <br>
     ex) plugin 파일을 호스트 의 특정 폴더에 넣고, 해당 폴더를 volume 과 연결해줌 <br>
+2. plugin 과 volume 을 동시에 사용할 수 없음, plugin 폴더에 설치 권한 문제 발생, <br>
+3. 따라서 복수의 plugin 설치시에 volume 이나 원격 plugin 중에 하나로 통일 <br
 
 
 ![Grafana](docs/logo-horizontal.png)

@@ -4,25 +4,36 @@ services:
 
     edgrafana:
         image: "ganadara135/edgrafana:7.1.0-pre"
-        volumes: 
+        container_name: edgrafana
+        volumes:
+            - grafana-storage:/var/lib/grafana      # For saving grafana setting records
                     # For production
-            # - ~/grafana-plugins:/var/lib/grafana/plugins
+            # - ~/grafana-plugins:/var/lib/grafana/plugins:rw          # [:mode] rw is read-write, ro is read-only
                     # For local dev 
             - ~/work/energy/test/grafana-plugins:/var/lib/grafana/plugins
-        # environment:
-        #     GF_RENDERING_SERVER_URL: "http://27.96.131.183:8681/render"
-        #     GF_RENDERING_CALLBACK_URL: "http://27.96.131.183:3003/"
-        #     GF_LOG_FILTERS: "rendering:debug"
-        environment:        # For Local
-            # GF_RENDERING_SERVER_URL: "http://renderer:8681/render"
-            GF_RENDERING_SERVER_URL: "http://renderer:8081/render"
+        environment:        # For production
+            # GF_RENDERING_SERVER_URL: "http://27.96.131.183:8081/render"     # this is Production, so don't need to point container internal port
+            # GF_RENDERING_CALLBACK_URL: "http://27.96.131.183:3000/"
+                           # For Local
+            GF_RENDERING_SERVER_URL: "http://renderer:8081/render"      # contianer internal port, the reason would be not Linux but Mac OS
             GF_RENDERING_CALLBACK_URL: "http://edgrafana:3000/"
-            # GF_RENDERING_CALLBACK_URL: "http://localhost:3003/"
+        # #     # GF_RENDERING_SERVER_URL: "http://renderer:8681/render"   # not work
+        # #     # GF_RENDERING_CALLBACK_URL: "http://localhost:3003/"       # not work
             GF_LOG_FILTERS: "rendering:debug"
-        expose:
-            - 3003
+            GF_SMTP_ENABLED: "true"
+            GF_SMTP_HOST: "smtp.naver.com:465"
+            GF_SMTP_FROM_ADDRESS: "ganadara1379@naver.com"      # from_address 와 user  이름을 갖게함
+            GF_SMTP_USER: "ganadara1379@naver.com"
+            GF_SMTP_PASSWORD: "@Hh24618071"
+            GF_SMTP_SKIP_VERIFY: "true"
+            
+            # GF_INSTALL_PLUGINS: "http://plugin-domain.com/my-custom-plugin.zip;jdbranham-diagram-panel"
+        # command: grafana-cli plugins install jdbranham-diagram-panel
+        # user: "472:472"           # 잘못 받다  # 겁나 중요, 본 Linux User ID 로 실행해야 grafana 설치 폴더에 접근 권한 생김
+        # expose:
+        #     - 3006
         ports:
-            - "3003:3000"
+            - "3006:3000"
         networks:
             - ednet
 
@@ -38,10 +49,11 @@ services:
 
     pdfreporter:
         image: izakmarais/grafana-reporter:${gr_version:-latest}
+        container_name: pdfreporter
         depends_on: 
             - edgrafana
             - renderer
-        command: "-ip edgrafana:3000"
+        command: "-ip edgrafana:3000"           # contianer internal port
         # command: "-ip localhost:3003"
         ports:
             - "8686:8686"
@@ -51,13 +63,9 @@ services:
 networks:
     ednet:
         name: ednet
+volumes:
+    grafana-storage:
 
 
-# curl -H "Authorization: Bearer eyJrIjoidjl2dmRpT3pyTG5nbGJxTzA3anMxY2I4bGl5WW1tZXIiLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3000/api/dashboards/home
-# curl -H "Authorization: Bearer eyJrIjoiWWU5NXVUWEdIckRIbmR6SGk3VTZqbHQ1Y2ZsWm8xZEciLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3003/api/dashboards/home
-# curl -H "Authorization: Bearer eyJrIjoiMW1EZkR2MEU5Y2hMZVozSVljbXgxOGNNS3k4M3Y4WjciLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3003/api/dashboards/home
-# curl -H "Authorization: Bearer eyJrIjoieTF5Z0hCT0dIclE0M2NtVXBXcHJKUkFPcVFMZ3h4YlEiLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3003/api/dashboards/home
-# curl -H "Authorization: Bearer eyJrIjoiUzM2YU9TeDJ6ckNRUElaaW9rc3BMdWo4SUE3NDd2cTYiLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3003/api/dashboards/home
-# curl -H "Authorization: Bearer eyJrIjoiVWd3ekNoNDZzdndOSWNCNXFIakdCZTZVdDFhdVpHdDQiLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3003/api/dashboards/home
-# curl -H "Authorization: Bearer eyJrIjoidmR3ZW1hOElOcUoycWowYWZzN1BlSnZsTFpyTmNXRnciLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3003/api/dashboards/home
 # curl -H "Authorization: Bearer eyJrIjoiRmlMZm5qb2N4RDFwSHVNQ2hJUWxpQzRLT0JIbm9mRnYiLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3003/api/dashboards/home
+# curl -H "Authorization: Bearer eyJrIjoic1h6NzQwYXNvWTRnZTdla2VicXpPNkpzTjRaSHJJcXkiLCJuIjoicGRmIiwiaWQiOjF9" http://27.96.131.183:3003/api/dashboards/home
