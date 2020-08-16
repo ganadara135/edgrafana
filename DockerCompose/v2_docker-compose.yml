@@ -31,12 +31,12 @@ services:
             - "8081"
             
     pdfreporter: 
-        image: "izakmarais/grafana-reporter"
+        image: "ganadara135/grafana-reporter:latest"
         container_name: pdfreporter
         depends_on: 
             - edgrafana
             - renderer
-        # network_mode: host
+        command: "-ip edgrafana:3000"           # contianer internal port
         ports: 
             - "8086:8086"
         # command: "-ip grafana:3000"

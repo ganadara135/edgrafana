@@ -6,18 +6,18 @@ services:
         image: "ganadara135/edgrafana:7.1.0-pre"
         container_name: edgrafana
         env_file:
-            - ./custom.env
+            - .env
         volumes:
             - grafana-storage:/var/lib/grafana      # For saving grafana setting records
                     # For production
-            - ~/grafana-plugins:/var/lib/grafana/plugins:rw          # [:mode] rw is read-write, ro is read-only
+            - ~/grafana-plugins:/var/lib/grafana/plugins:ro          # [:mode] rw is read-write, ro is read-only
                     # For local dev 
             # - ~/work/energy/test/grafana-plugins:/var/lib/grafana/plugins
         environment:        # For production
             GF_RENDERING_SERVER_URL: "http://renderer:8081/render"     # this is Production, so don't need to point container internal port
             GF_RENDERING_CALLBACK_URL: "http://edgrafana:3000/"
-        #   # GF_RENDERING_SERVER_URL: "http://27.96.131.183:8081/render"     # this is Production, so don't need to point container internal port
-        #   # GF_RENDERING_CALLBACK_URL: "http://27.96.131.183:3000/"
+        # # # GF_RENDERING_SERVER_URL: "http://27.96.131.183:8081/render"     # this is Production, so don't need to point container internal port
+        # # # GF_RENDERING_CALLBACK_URL: "http://27.96.131.183:3000/"
                            # For Local
             # GF_RENDERING_SERVER_URL: "http://renderer:8081/render"      # contianer internal port, the reason would be not Linux but Mac OS
             # GF_RENDERING_CALLBACK_URL: "http://edgrafana:3000/"
@@ -30,13 +30,15 @@ services:
             GF_SMTP_USER: ${SMTP_USER}
             GF_SMTP_PASSWORD: ${SMTP_PASSWORD}
             GF_SMTP_SKIP_VERIFY: "true"
-            
+            GF_PLUGINS_ENABLE_ALPHA: "true"
+            GF_PANELS_ENABLE_ALPHA: "true"
+            # GF_ 이름 규칙
+            # GF_<SectionName>_<KeyName>
            # # GF_INSTALL_PLUGINS: "http://plugin-domain.com/my-custom-plugin.zip;jdbranham-diagram-panel"
         # command: grafana-cli plugins install jdbranham-diagram-panel
         # user: "472:472"           # 잘못 받다  # 겁나 중요, 본 Linux User ID 로 실행해야 grafana 설치 폴더에 접근 권한 생김
-
         ports:
-            - "3006:3000"
+            - 3006:3000
         networks:
             - ednet
 
@@ -46,12 +48,13 @@ services:
         depends_on: 
             - edgrafana
         ports: 
-            - "8681:8081"
+            - 8681:8081
         networks:
             - ednet
 
     pdfreporter:
-        image: izakmarais/grafana-reporter:${gr_version:-latest}
+        # image: izakmarais/grafana-reporter:${gr_version:-latest}
+        image: ganadara135/grafana-reporter:latest
         container_name: pdfreporter
         depends_on: 
             - edgrafana
@@ -59,15 +62,27 @@ services:
         command: "-ip edgrafana:3000"           # contianer internal port
         # command: "-ip localhost:3003"
         ports:
-            - "8686:8686"
+            - 8686:8686
         networks:
             - ednet
+        environment:
+            # GRAFANA_HOST: "grafana"
+            # GRAFANA_PORT: "3000"
+            # GRAFANA_USER: "admin"
+            # GRAFANA_PASS: "********"
+            GRAFANA_REPORTER_EXTERNAL_URL: "http://localhost:8686"
 
 networks:
     ednet:
         name: ednet
 volumes:
     grafana-storage:      # For saving grafana setting records
+        name: grafana-storage
+
+
+        
+        # 漢子
+
 
 
 # curl -H "Authorization: Bearer eyJrIjoiRmlMZm5qb2N4RDFwSHVNQ2hJUWxpQzRLT0JIbm9mRnYiLCJuIjoicGRmIiwiaWQiOjF9" http://localhost:3003/api/dashboards/home
